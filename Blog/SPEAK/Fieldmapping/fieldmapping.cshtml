@@ -23,8 +23,7 @@
                     <span class="MapFieldSitecore"> 
                         <select data-bind="options: $parents[1].SitecoreFields, event:{change: function() { $root.SetSitecoreValue($element, $data) }}"></select>
                         <input type="text" data-bind="value: SC" class="form-control" />
-                    </span> 
-                    <span class="FieldDivider"> </span> 
+                    </span>  
                     <span class="MapFieldCRM">
                         <input type="text" data-bind="value: CRM" class="form-control" />
                         <select data-bind="options: $parents[1].CRMFields, event:{change: function() { $root.SetCRMValue($element, $data) }}"></select>
