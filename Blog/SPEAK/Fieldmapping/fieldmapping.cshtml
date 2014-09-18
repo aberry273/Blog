@@ -1,0 +1,39 @@
+@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Web.UI.Controls.Common.UserControls
+@model RenderingModel
+@{
+  var rendering = Html.Sitecore().Controls().GetUserControl(Model.Rendering);
+  rendering.Class = "sc-FieldMapping";
+  rendering.Requires.Css("client", "FieldMapping.css");
+  rendering.Requires.Script("client", "FieldMapping.js"); 
+
+  rendering.GetString("Fields", "Fields"); 
+  rendering.GetString("SitecoreFields", "SitecoreFields");
+  rendering.GetString("CRMFields", "CRMFields"); 
+  var htmlAttributes = rendering.HtmlAttributes;
+}      
+ 
+<div @htmlAttributes>
+  
+    <div data-bind="with: Fields" id="FieldMapping">
+        <ul data-bind="foreach: $data">
+            <li>
+                <span class="MappingField">  
+                    <span class="MapFieldSitecore"> 
+                        <select data-bind="options: $parents[1].SitecoreFields, event:{change: function() { $root.SetSitecoreValue($element, $data) }}"></select>
+                        <input type="text" data-bind="value: SC" class="form-control" />
+                    </span> 
+                    <span class="FieldDivider"> </span> 
+                    <span class="MapFieldCRM">
+                        <input type="text" data-bind="value: CRM" class="form-control" />
+                        <select data-bind="options: $parents[1].CRMFields, event:{change: function() { $root.SetCRMValue($element, $data) }}"></select>
+                    </span>
+                   <span data-bind="if: ($index() > 0)" id="DeleteButton">
+                       <input type="button" data-bind="click: function() { $root.DeleteField($index()) }" value="Remove" />
+                   </span>
+               </span>
+            </li>
+        </ul>
+    </div> 
+</div>
