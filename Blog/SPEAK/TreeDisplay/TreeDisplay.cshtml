@@ -1,0 +1,29 @@
+@using Sitecore.Mvc
+@using Sitecore.Mvc.Presentation
+@using Sitecore.Web.UI.Controls.Common.UserControls
+@model RenderingModel
+@{
+  var rendering = Html.Sitecore().Controls().GetUserControl(Model.Rendering);
+  rendering.Class = "sc-NodeDisplay";
+  rendering.Requires.Script("client", "NodeDisplay.js");
+  rendering.Requires.Css("client", "NodeDisplay.css");
+  rendering.GetString("Nodes", "Nodes");
+  var htmlAttributes = rendering.HtmlAttributes;
+}      
+<div @htmlAttributes> 
+     <div data-bind="template: { name: 'node-template', foreach: Nodes }"></div> 
+</div>
+
+<script type="text/html" id="node-template">
+    <ul> 
+        <li data-bind="if: $data.Children">
+            <input type="button" value="+" data-bind="click: function() { $root.ToggleNode($element); }" />
+        </li>
+        <li class="InputButton">
+            <input type="button" data-bind="value: $data.Name, click: function() { $root.SelectNode($data, $element); }" />
+        </li> 
+		<span class="Children" data-bind="if: $data.Children" style="display:none;">
+			<ol data-bind="template: { name: 'node-template', foreach: $data.Children }"></ol>
+		</span>
+	</ul>
+</script>
