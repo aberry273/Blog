@@ -19,10 +19,10 @@
         <li data-bind="if: $data.Children">
             <input type="button" value="+" data-bind="click: function() { $root.ToggleNode($element); }" />
         </li>
-        <li class="InputButton">
+        <li">
             <input type="button" data-bind="value: $data.Name, click: function() { $root.SelectNode($data, $element); }" />
         </li> 
-		<span class="Children" data-bind="if: $data.Children" style="display:none;">
+		<span data-bind="if: $data.Children" style="display:none;">
 			<ol data-bind="template: { name: 'node-template', foreach: $data.Children }"></ol>
 		</span>
 	</ul>
