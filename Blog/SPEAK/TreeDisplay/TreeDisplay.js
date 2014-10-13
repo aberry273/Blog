@@ -9,8 +9,6 @@ define(["sitecore"], function (Sitecore) {
     SetNodes: function(nodes)
     {  
         this.set("Nodes", nodes);
-        this.set("SelectedNode", this.GetInitNode());
-        this.set("Lineage", [this.GetInitNode().Name]); 
     },
 
   });
